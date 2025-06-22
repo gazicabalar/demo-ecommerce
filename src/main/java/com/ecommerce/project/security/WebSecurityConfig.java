@@ -30,15 +30,17 @@ import java.util.Set;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
-
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
+    }
+
+    private final UserDetailsServiceImpl userDetailsService;
+    private final AuthEntryPointJwt unauthorizedHandler;
+
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, AuthEntryPointJwt unauthorizedHandler) {
+        this.userDetailsService = userDetailsService;
+        this.unauthorizedHandler = unauthorizedHandler;
     }
 
     @Bean
@@ -74,7 +76,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/v3/api-docs/**").permitAll()
                                 .requestMatchers("/h2-console/**").permitAll()
                                 //.requestMatchers("/api/admin/**").permitAll()
-                                //.requestMatchers("/api/public/**").permitAll()
+                                .requestMatchers("/api/public/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/api/test/**").permitAll()
                                 .requestMatchers("/images/**").permitAll()
@@ -102,7 +104,7 @@ public class WebSecurityConfig {
     @Bean
     public CommandLineRunner initData(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
-            // Retrieve or create roles
+
             Role userRole = roleRepository.findByRoleName(AppRole.ROLE_USER)
                     .orElseGet(() -> {
                         Role newUserRole = new Role(AppRole.ROLE_USER);
@@ -126,7 +128,7 @@ public class WebSecurityConfig {
             Set<Role> adminRoles = Set.of(userRole, sellerRole, adminRole);
 
 
-            // Create users if not already present
+
             if (!userRepository.existsByUserName("user1")) {
                 User user1 = new User("user1", "user1@example.com", passwordEncoder.encode("password1"));
                 userRepository.save(user1);
