@@ -1,0 +1,25 @@
+{
+    "productName": "Smartwatch X100",
+    "description": "A smartwatch with health tracking, GPS, and long battery life",
+    "quantity": 50,
+    "price": 150,
+    "discount": 5
+}
+
+
+{
+    "productName": "Wireless Earbuds Pro",
+    "description": "Noise-cancelling wireless earbuds with superior sound quality",
+    "quantity": 200,
+    "price": 80,
+    "discount": 15
+}
+
+
+{
+    "productName": "Gaming Laptop GX",
+    "description": "High-performance gaming laptop with a 4K display and powerful GPU",
+    "quantity": 30,
+    "price": 1200,
+    "discount": 20
+}
