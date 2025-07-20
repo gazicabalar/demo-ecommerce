@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ecommerce</groupId>
-	<artifactId>demo-ecom</artifactId>
+	<artifactId>ecom</artifactId>
 	<version>0.0.1</version>
-	<name>demo-ecom</name>
+	<name>ecom</name>
 	<description>Spring Boot Ecommerce Project</description>
 	<url/>
 	<licenses>
